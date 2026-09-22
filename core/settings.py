@@ -169,3 +169,13 @@ AUTHENTICATION_BACKENDS = [
     # ваши кастомные бэкенды (например, для Guardian, блоков авторизации по СМС и т.д.)
 ]
 
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
