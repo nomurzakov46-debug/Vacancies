@@ -1,0 +1,57 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+    
+    <!-- ПРОВЕРКА БЭКЕНДА: Пользователь залогинен? -->
+    {% if user.is_authenticated %}
+        
+        <!-- Контент для авторизованных пользователей -->
+        <div class="text-center py-6">
+            <div class="inline-flex p-3 bg-green-100 text-green-600 rounded-full mb-4">
+                <!-- Простая галочка (иконка) -->
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">Добро пожаловать в систему!</h1>
+            <p class="text-gray-600 mb-6">Вы успешно прошли аутентификацию и бэкенд создал для вас сессию.</p>
+            
+            <!-- Выводим данные пользователя прямо из встроенной модели User -->
+            <div class="bg-slate-50 rounded-lg p-4 max-w-md mx-auto text-left border border-gray-200 font-mono text-sm space-y-2">
+                <div class="text-gray-500">// Данные из таблицы auth_user:</div>
+                <div><span class="text-blue-600">ID пользователя:</span> {{ user.id }}</div>
+                <div><span class="text-blue-600">Логин:</span> {{ user.username }}</div>
+                <div><span class="text-blue-600">Email:</span> {{ user.email|default:"Не указан" }}</div>
+                <div><span class="text-blue-600">Статус суперпользователя:</span> {{ user.is_superuser }}</div>
+                <div><span class="text-blue-600">Дата регистрации:</span> {{ user.date_joined|date:"d.m.Y H:i" }}</div>
+            </div>
+        </div>
+
+    {% else %}
+        
+        <!-- Контент для гостей (анонимных пользователей) -->
+        <div class="text-center py-12">
+            <h1 class="text-4xl font-extrabold text-slate-800 mb-4 tracking-tight">
+                Привет! Это твой первый Django проект 🚀
+            </h1>
+            <p class="text-lg text-gray-600 max-w-xl mx-auto mb-8">
+                Сейчас вы видите страницу как <span class="font-semibold text-red-500">Анонимный пользователь</span>. Чтобы протестировать работу сессий, базы данных и функции <code class="bg-gray-100 px-1 py-0.5 rounded text-red-600 text-sm font-mono">authenticate()</code>, вам нужно войти в аккаунт.
+            </p>
+            
+            <!-- Кнопки навигации -->
+            <div class="flex justify-center gap-4">
+                <a href="{% url 'login' %}" 
+                   class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-lg transition shadow-sm">
+                    Войти в аккаунт
+                </a>
+                <a href="{% url 'register' %}" 
+                   class="bg-gray-800 hover:bg-gray-900 text-white font-medium py-2.5 px-6 rounded-lg transition shadow-sm">
+                    Создать аккаунт
+                </a>
+            </div>
+        </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wn5$(@$6&u7nrb62-m=@k)n4l7)7jak$zvucj+z!@$j&$6%zsc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'omurzakov.pythonanywhere.com']
+ALLOWED_HOSTS = [ '*']
 
 
 # Application definition
@@ -145,7 +145,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        'rest_framework.authentication.TokenAuthentication',
+       
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -172,7 +172,7 @@ AUTHENTICATION_BACKENDS = [
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    # BASE_DIR / "static",
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"

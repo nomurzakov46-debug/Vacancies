@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.shortcuts import render
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
@@ -38,11 +39,11 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0)),
     path('admin/', admin.site.urls),
-    
-    
+    path('api/users/', include('users.urls')),
+    path('web/', lambda request: render(request, 'users/home.html')),
     
         path('api/',include('vacancies.urls')),
-        
+        path('web/', lambda request: render(request, 'users/home.html')),
         
         path('api/',include('users.urls')),
         
